@@ -156,3 +156,33 @@ async def test_unlock_user_account(db_session, locked_user):
     assert unlocked, "The account should be unlocked"
     refreshed_user = await UserService.get_by_id(db_session, locked_user.id)
     assert not refreshed_user.is_locked, "The user should no longer be locked"
+
+async def test_create_user_valid_nickname(async_client):
+    user_data = {
+        "nickname": "valid_nickname",
+        "email": "test_valid@example.com",
+        "password": "StrongPassword123!"
+    }
+    response = await async_client.post("/users/", json=user_data)
+    assert response.status_code == 201
+    assert response.json()["nickname"] == user_data["nickname"]
+
+async def test_create_user_invalid_nickname(async_client):
+    user_data = {
+        "nickname": "invalid!nickname", # contains invalid characters
+        "email": "test_invalid@example.com",
+        "password": "StrongPassword123!"
+    }
+    response = await async_client.post("/users/", json=user_data)
+    assert response.status_code == 422
+    assert "nickname" in response.json()["detail"][0]["loc"]
+
+async def test_create_user_duplicate_nickname(async_client, verified_user):
+    user_data = {
+        "nickname": verified_user.nickname, # same nickname as an existing user
+        "email": "duplicate_nickname@example.com",
+        "password": "StrongPassword123!"
+    }
+    response = await async_client.post("/users/", json=user_data)
+    assert response.status_code == 400
+    assert "Nickname already exists" in response.json().get("detail", "")
