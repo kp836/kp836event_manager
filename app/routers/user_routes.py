@@ -139,6 +139,7 @@ async def create_user(user: UserCreate, request: Request, db: AsyncSession = Dep
     Returns:
     - UserResponse: The newly created user's information along with navigation links.
     """
+    # check for duplicate email
     existing_user = await UserService.get_by_email(db, user.email)
     if existing_user:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already exists")
@@ -194,7 +195,20 @@ async def list_users(
 async def register(user_data: UserCreate, session: AsyncSession = Depends(get_db), email_service: EmailService = Depends(get_email_service)):
     user = await UserService.register_user(session, user_data.model_dump(), email_service)
     if user:
-        return user
+        return UserResponse(
+            id=user.id,
+            nickname=user.nickname,
+            email=user.email,
+            first_name=user.first_name,
+            last_name=user.last_name,
+            bio=user.bio,
+            profile_picture_url=user.profile_picture_url,
+            github_profile_url=user.github_profile_url,
+            linkedin_profile_url=user.linkedin_profile_url,
+            role=user.role,
+            created_at=user.created_at,
+            updated_at=user.updated_at,
+        )
     raise HTTPException(status_code=400, detail="Email already exists")
 
 @router.post("/login/", response_model=TokenResponse, tags=["Login and Registration"])

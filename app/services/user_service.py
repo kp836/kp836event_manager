@@ -14,6 +14,7 @@ from app.utils.security import generate_verification_token, hash_password, verif
 from uuid import UUID
 from app.services.email_service import EmailService
 from app.models.user_model import UserRole
+from fastapi import HTTPException
 import logging
 
 settings = get_settings()
@@ -56,7 +57,7 @@ class UserService:
 
             # validate email uniqueness
             if await cls.get_by_email(session, validated_data['email']):
-                raise ValidationError("Email already exists. Please choose another.")
+                raise HTTPException(status_code=400, detail="Email already exists. Please choose another.")
             
             # validate and check nickname uniqueness
             nickname = validated_data.get("nickname", generate_nickname())
