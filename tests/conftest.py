@@ -227,7 +227,6 @@ def user_base_data():
 @pytest.fixture
 def user_base_data_invalid():
     return {
-        "username": "john_doe_123",
         "email": "john.doe.example.com",
         "nickname": "john_doe_123",
         "full_name": "John Doe",
@@ -258,7 +257,7 @@ def user_update_data():
 def user_response_data():
     return {
         "id": uuid4(),
-        "username": "testuser",
+        "nickname": "testuser",
         "email": "test@example.com",
         "last_login_at": datetime.now(),
         "created_at": datetime.now(),
@@ -273,7 +272,7 @@ def login_request_data():
 @pytest.fixture
 async def user_token(verified_user):
     token_data = {"sub": str(verified_user.id), "role": "AUTHENTICATED"}
-    return create_access_token(data="token_data")
+    return create_access_token(data=token_data)
 
 @pytest.fixture
 async def admin_token(admin_user):
