@@ -43,7 +43,7 @@ class UserCreate(UserBase):
 
 class UserUpdate(UserBase):
     email: Optional[EmailStr] = Field(None, example="john.doe@example.com")
-    nickname: Optional[str] = Field(None, min_length=3, max_length=10, pattern=r'^(?![-_])[a-zA-Z0-9-_]+(?<![-_])$', example="john_doe123")
+    nickname: Optional[str] = Field(None, min_length=3, max_length=10, pattern=r'^[a-zA-Z0-9](?:[a-zA-Z0-9-_]*[a-zA-Z0-9])?$', example="john_doe123")
     first_name: Optional[str] = Field(None, example="John")
     last_name: Optional[str] = Field(None, example="Doe")
     bio: Optional[str] = Field(None, example="Experienced software developer specializing in web applications.")
