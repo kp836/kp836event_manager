@@ -2,6 +2,52 @@
 
 Welcome to the Event Manager Company! As a newly hired Software QA Analyst/Developer and a student in software engineering, you are embarking on an exciting journey to contribute to our project aimed at developing a secure, robust REST API that supports JWT token-based OAuth2 authentication. This API serves as the backbone of our user management system and will eventually expand to include features for event management and registration.
 
+## Documentation - Khushi Patel
+1. **Docker Image**: This is the image of the latest docker image which can be accessed on Docker
+
+[Docker Tag](https://hub.docker.com/r/kp836/kp836_eventmanager/tags)
+![alt text](DockerImage.png)
+
+2. **Closed Issues**: Overview of all the issues that successfully got resolved
+
+1. [Username validation](https://github.com/kp836/kp836event_manager/issues/1)
+* The tests had a few bugs in them leading to username validation test to fail so fixed those errors and made sure that it is checked for requirements before adding the username to the database.
+
+2. [Password Validation](https://github.com/kp836/kp836event_manager/issues/2)
+* Added conditions for password to meet certain conditions before adding it to the database and the password will not show up in plain text, it will always be hashed.
+
+3. [Profile field edge cases](https://github.com/kp836/kp836event_manager/issues/3)
+* The profile has several fields and I ensured that they have certain conditions such as having only 250 characters in the bio and giving valid URLs otherwise it results in the profile not being added.
+
+4. [Duplicate Email Validation](https://github.com/kp836/kp836event_manager/issues/4)
+* This issue was resolved with the other pytest where this test failed but it was ensured that this test would pass.
+
+5. [Profile Field Validation Error Messaging](https://github.com/kp836/kp836event_manager/issues/5)
+* Added user friendly messages when creating or updating account, creating an account or login to ensure if there is an error then user can fix that with the help of the error message received.
+
+6. [Demo from video](https://github.com/kp836/kp836event_manager/issues/6)
+* The error was related to login and registration having an mismatch but it was resolved with other pytests.
+
+7. [Fixed pytest errors](https://github.com/kp836/kp836event_manager/issues/9)
+* Before starting the assignment, there were multiple errors and to fix them, I created a MailTrap account and made sure to have an inbox from where the tests would verify it works.
+
+8. [Coverage](https://github.com/kp836/kp836event_manager/issues/12)
+* Ensured comprehensive high coverage to meet the standards.
+
+![alt text](Coverage.png)
+
+9. [Documentation](https://github.com/kp836/kp836event_manager/issues/15)
+
+3. **Reflection**: 
+
+The assignment gave an insight into what a QA Analyst/Developer role looks like and what sorts of tasks they complete on a daily basis. The assignment improved my skills significantly as I got to learn how tests are done for features and how to add features and improve the usability of a website.
+
+This was an amazing opportunity to build and refine the user management process while meeting the best practices requirement. I had the chance of implementing validation logic to improve the coverage and the project emphasized the importance of reliability and user-friendly design.
+
+There were several challenges along the way such as ensuring email uniqueness, password validation, and unique nicknames. It is important to give the best experience to user so these fixes ensured that users had seamless registration process. 
+
+The project is comprehensive because of its need for technical proficiency but also the need for skill to use Github and building a good documentation that makes it easier to understand the project.
+
 ## Assignment Objectives
 
 1. **Familiarize with REST API functionality and structure**: Gain hands-on experience working with a REST API, understanding its endpoints, request/response formats, and authentication mechanisms.
