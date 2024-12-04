@@ -6,6 +6,7 @@ from enum import Enum
 import uuid
 import re
 
+
 from app.utils.nickname_gen import generate_nickname
 
 class UserRole(str, Enum):
@@ -38,12 +39,13 @@ class UserBase(BaseModel):
         from_attributes = True
 
 class UserCreate(UserBase):
+    nickname: str = Field(max_length=50)
     email: EmailStr = Field(..., example="john.doe@example.com")
     password: str = Field(..., example="Secure*1234")
 
 class UserUpdate(UserBase):
     email: Optional[EmailStr] = Field(None, example="john.doe@example.com")
-    nickname: Optional[str] = Field(None, min_length=3, pattern=r'^[\w-]+$', example="john_doe123")
+    nickname: Optional[str] = Field(None, min_length=3, max_length=20, pattern=r'^[a-zA-Z0-9](?:[a-zA-Z0-9-_]*[a-zA-Z0-9])?$', example="john_doe123")
     first_name: Optional[str] = Field(None, example="John")
     last_name: Optional[str] = Field(None, example="Doe")
     bio: Optional[str] = Field(None, example="Experienced software developer specializing in web applications.")
