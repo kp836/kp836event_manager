@@ -34,6 +34,8 @@ Welcome to the Event Manager Company! As a newly hired Software QA Analyst/Devel
 8. [Coverage](https://github.com/kp836/kp836event_manager/issues/12)
 * Ensured comprehensive high coverage to meet the standards.
 
+![alt text](Coverage.png)
+
 9. [Documentation](https://github.com/kp836/kp836event_manager/issues/15)
 
 3. **Reflection**: 
